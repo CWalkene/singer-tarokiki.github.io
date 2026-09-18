@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { profile } from '@/lib/data/profile';
+import { getMediaLinks } from '@/lib/data/media-links';
 import { SparkleIcon } from '@/components/SparkleIcon';
 import type { Locale } from '@/lib/i18n/config';
 import type { Dictionary } from '@/lib/i18n/dictionaries';
@@ -9,16 +10,18 @@ interface Props {
   dict: Dictionary;
 }
 
-const social: { label: string; href: string }[] = [
+const internationalSocial = [
   { label: 'Bilibili', href: profile.links.bilibili },
   { label: 'Instagram', href: profile.links.instagram },
-  { label: 'Spotify', href: profile.links.spotify },
-  { label: 'Apple Music', href: profile.links.appleMusic },
-  { label: 'YouTube', href: profile.links.youtube },
   { label: 'VGMdb', href: profile.links.vgmdb },
 ];
 
 export function Footer({ locale, dict }: Props) {
+  const listening = getMediaLinks(profile.links, locale);
+  const social = locale === 'zh'
+    ? [{ label: 'Bilibili', href: profile.links.bilibili }]
+    : internationalSocial;
+
   return (
     <footer className="mt-24 px-4 pb-8 md:px-8">
       <div className="mx-auto max-w-[1200px]">
@@ -40,7 +43,7 @@ export function Footer({ locale, dict }: Props) {
             <div>
               <p className="script mb-4 text-[var(--color-rose)]">{dict.footer.listen}</p>
               <ul className="space-y-2.5">
-                {social.slice(0, 3).map((s) => (
+                {listening.map((s) => (
                   <li key={s.label}>
                     <Link
                       href={s.href}
@@ -58,7 +61,7 @@ export function Footer({ locale, dict }: Props) {
             <div>
               <p className="script mb-4 text-[var(--color-rose)]">{dict.footer.follow}</p>
               <ul className="space-y-2.5">
-                {social.slice(3).map((s) => (
+                {social.map((s) => (
                   <li key={s.label}>
                     <Link
                       href={s.href}

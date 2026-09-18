@@ -4,6 +4,7 @@ import { getDictionary } from '@/lib/i18n/dictionaries';
 import { locales, type Locale, isLocale } from '@/lib/i18n/config';
 import { notFound } from 'next/navigation';
 import { featuredSong } from '@/lib/data/songs';
+import { getMediaLinks } from '@/lib/data/media-links';
 import { Starfield } from '@/components/Starfield';
 import { SparkleIcon } from '@/components/SparkleIcon';
 import { PaperPlane } from '@/components/PaperPlane';
@@ -51,10 +52,10 @@ export default async function Home({
 
             {/* big name */}
             <h1
-              className="mt-6 font-display font-medium tracking-tight leading-[0.95] fade-up"
+              className="mt-6 font-display font-medium fade-up"
               style={{ animationDelay: '0.12s' }}
             >
-              <span className="block text-dream text-[clamp(4.5rem,14vw,12rem)]">
+              <span className="page-title block text-dream text-[clamp(4.5rem,14vw,12rem)]">
                 Tarokiki
               </span>
             </h1>
@@ -129,36 +130,17 @@ export default async function Home({
             </div>
 
             <div className="mt-7 flex flex-wrap gap-3">
-              {featuredSong.links?.spotify && (
+              {getMediaLinks(featuredSong.links, locale).map((link) => (
                 <Link
-                  href={featuredSong.links.spotify}
+                  key={link.platform}
+                  href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="rounded-full bg-white/80 px-5 py-2 text-xs font-semibold text-[var(--color-ink)] hover:bg-white hover:shadow-md transition-all"
+                  className="inline-flex items-center gap-1 rounded-full bg-white/80 px-5 py-2 text-xs font-semibold text-[var(--color-ink)] hover:bg-white hover:shadow-md transition-all"
                 >
-                  Spotify ↗
+                  {link.label} <ArrowUpRight className="h-3 w-3" />
                 </Link>
-              )}
-              {featuredSong.links?.youtube && (
-                <Link
-                  href={featuredSong.links.youtube}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="rounded-full bg-white/80 px-5 py-2 text-xs font-semibold text-[var(--color-ink)] hover:bg-white hover:shadow-md transition-all"
-                >
-                  YouTube ↗
-                </Link>
-              )}
-              {featuredSong.links?.appleMusic && (
-                <Link
-                  href={featuredSong.links.appleMusic}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="rounded-full bg-white/80 px-5 py-2 text-xs font-semibold text-[var(--color-ink)] hover:bg-white hover:shadow-md transition-all"
-                >
-                  Apple Music ↗
-                </Link>
-              )}
+              ))}
             </div>
 
             <Link

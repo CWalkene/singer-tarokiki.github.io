@@ -54,10 +54,10 @@ export default async function GalleryPage({
               {dict.gallery.eyebrow.split('·')[0].trim()}
               <SparkleIcon size={12} className="text-[var(--color-rose)]" />
             </p>
-            <h1 className="mt-6 font-display text-6xl md:text-7xl lg:text-8xl text-dream font-medium leading-[0.95] fade-up" style={{ animationDelay: '0.12s' }}>
+            <h1 className="page-title mt-6 font-display text-6xl md:text-7xl lg:text-8xl text-dream font-medium fade-up" style={{ animationDelay: '0.12s' }}>
               {dict.gallery.title}
             </h1>
-            <p className="mx-auto mt-7 max-w-2xl text-base md:text-lg leading-relaxed text-[var(--color-ink-soft)] fade-up" style={{ animationDelay: '0.2s' }}>
+            <p className="mx-auto mt-10 max-w-2xl text-base md:text-lg leading-relaxed text-[var(--color-ink-soft)] fade-up" style={{ animationDelay: '0.2s' }}>
               {dict.gallery.lede}
             </p>
           </div>

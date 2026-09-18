@@ -5,6 +5,7 @@ import { getDictionary } from '@/lib/i18n/dictionaries';
 import { locales, type Locale, isLocale } from '@/lib/i18n/config';
 import { notFound } from 'next/navigation';
 import { songs } from '@/lib/data/songs';
+import { getMediaLinks } from '@/lib/data/media-links';
 import { SparkleIcon } from '@/components/SparkleIcon';
 import { Starfield } from '@/components/Starfield';
 import { HomeReveal } from '@/components/HomeReveal';
@@ -54,10 +55,10 @@ export default async function MusicPage({
               {dict.music.eyebrow.split('·')[0].trim()}
               <SparkleIcon size={12} className="text-[var(--color-rose)]" />
             </p>
-            <h1 className="mt-6 font-display text-6xl md:text-7xl lg:text-8xl text-dream font-medium leading-[0.95] tracking-tight fade-up" style={{ animationDelay: '0.12s' }}>
+            <h1 className="page-title mt-6 font-display text-6xl md:text-7xl lg:text-8xl text-dream font-medium fade-up" style={{ animationDelay: '0.12s' }}>
               {dict.music.title}
             </h1>
-            <p className="mx-auto mt-7 max-w-2xl text-base md:text-lg leading-relaxed text-[var(--color-ink-soft)] fade-up" style={{ animationDelay: '0.2s' }}>
+            <p className="mx-auto mt-10 max-w-2xl text-base md:text-lg leading-relaxed text-[var(--color-ink-soft)] fade-up" style={{ animationDelay: '0.2s' }}>
               {dict.music.lede}
             </p>
           </div>
@@ -112,46 +113,17 @@ export default async function MusicPage({
 
               {/* Links */}
               <div className="mt-6 flex flex-wrap gap-2">
-                {song.links?.spotify && (
+                {getMediaLinks(song.links, locale).map((link) => (
                   <Link
-                    href={song.links.spotify}
+                    key={link.platform}
+                    href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1 rounded-full bg-white/80 px-4 py-1.5 text-xs font-semibold text-[var(--color-ink)] hover:bg-white transition-colors"
                   >
-                    Spotify <ArrowUpRight className="h-3 w-3" />
+                    {link.label} <ArrowUpRight className="h-3 w-3" />
                   </Link>
-                )}
-                {song.links?.appleMusic && (
-                  <Link
-                    href={song.links.appleMusic}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 rounded-full bg-white/80 px-4 py-1.5 text-xs font-semibold text-[var(--color-ink)] hover:bg-white transition-colors"
-                  >
-                    Apple <ArrowUpRight className="h-3 w-3" />
-                  </Link>
-                )}
-                {song.links?.youtube && (
-                  <Link
-                    href={song.links.youtube}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 rounded-full bg-white/80 px-4 py-1.5 text-xs font-semibold text-[var(--color-ink)] hover:bg-white transition-colors"
-                  >
-                    YouTube <ArrowUpRight className="h-3 w-3" />
-                  </Link>
-                )}
-                {song.links?.bilibili && (
-                  <Link
-                    href={song.links.bilibili}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 rounded-full bg-white/80 px-4 py-1.5 text-xs font-semibold text-[var(--color-ink)] hover:bg-white transition-colors"
-                  >
-                    Bilibili <ArrowUpRight className="h-3 w-3" />
-                  </Link>
-                )}
+                ))}
               </div>
             </article>
           ))}

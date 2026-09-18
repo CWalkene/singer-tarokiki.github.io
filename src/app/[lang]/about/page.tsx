@@ -76,10 +76,10 @@ export default async function AboutPage({
                 {dict.about.eyebrow.split('·')[0].trim()}
                 <SparkleIcon size={12} className="text-[var(--color-rose)]" />
               </p>
-              <h1 className="mt-4 font-display text-6xl md:text-7xl text-dream font-medium leading-[0.95]">
+              <h1 className="page-title mt-4 font-display text-6xl md:text-7xl text-dream font-medium">
                 Tarokiki
               </h1>
-              <p className="mt-6 font-display italic text-2xl md:text-3xl text-[var(--color-ink)] leading-snug">
+              <p className="mt-9 font-display italic text-2xl md:text-3xl text-[var(--color-ink)] leading-snug">
                 “{profile.selfDescription}”
               </p>
             </div>

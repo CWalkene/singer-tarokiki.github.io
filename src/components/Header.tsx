@@ -17,9 +17,18 @@ interface Props {
 
 export function Header({ locale, dict }: Props) {
   const [openPath, setOpenPath] = useState<string | null>(null);
+  const [isMenuFloating, setIsMenuFloating] = useState(false);
   const pathname = usePathname() ?? '';
   const normalizedPath = pathname.replace(/\/$/, '');
   const isMenuOpen = openPath === pathname;
+
+  const toggleMenu = () => {
+    if (!isMenuOpen) {
+      // 每次展开时确定定位，收起动画结束前不切换，避免正文跳动。
+      setIsMenuFloating(window.scrollY > 0);
+    }
+    setOpenPath(isMenuOpen ? null : pathname);
+  };
 
   const handleNavClick = (event: MouseEvent<HTMLAnchorElement>, href: string) => {
     if (event.defaultPrevented || event.button !== 0 ||
@@ -48,7 +57,7 @@ export function Header({ locale, dict }: Props) {
       >
         {dict.nav.skipToContent}
       </a>
-      <div className="mx-auto max-w-[1200px] px-4 pt-4 md:px-8">
+      <div className="relative mx-auto max-w-[1200px] px-4 pt-4 md:px-8">
         <div className="glass-card flex h-16 items-center justify-between gap-6 rounded-full px-4 md:h-[68px] md:px-7">
           <Link
             href={`/${locale}`}
@@ -93,7 +102,7 @@ export function Header({ locale, dict }: Props) {
             <LanguageSwitcher current={locale} ariaLabel={dict.nav.language} />
             <button
               type="button"
-              onClick={() => setOpenPath(isMenuOpen ? null : pathname)}
+              onClick={toggleMenu}
               className="rounded-full bg-white/60 p-2 text-[var(--color-ink-soft)] transition-colors hover:bg-white hover:text-[var(--color-ink)]"
               aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={isMenuOpen}
@@ -105,8 +114,15 @@ export function Header({ locale, dict }: Props) {
           </div>
         </div>
 
-        {isMenuOpen && (
-          <nav id="mobile-navigation" className="glass-card mt-2 rounded-3xl p-3 md:hidden" aria-label="Mobile navigation">
+        <div
+          className="mobile-navigation"
+          data-open={isMenuOpen}
+          data-floating={isMenuFloating}
+          aria-hidden={!isMenuOpen}
+          inert={!isMenuOpen}
+        >
+          <div className="mobile-navigation__clip">
+          <nav id="mobile-navigation" className="glass-card mt-2 rounded-3xl p-3" aria-label="Mobile navigation">
             <div className="flex flex-col gap-1">
               {items.map((it) => {
                 const isActive = normalizedPath === it.href ||
@@ -131,7 +147,8 @@ export function Header({ locale, dict }: Props) {
               })}
             </div>
           </nav>
-        )}
+          </div>
+        </div>
       </div>
     </header>
   );
