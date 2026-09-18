@@ -6,7 +6,7 @@ import { SparkleIcon } from '@/components/SparkleIcon';
 import { Starfield } from '@/components/Starfield';
 import { StarTrail } from '@/components/StarTrail';
 
-import { HomeReveal } from '@/components/HomeReveal';
+import { PageReveal } from '@/components/PageReveal';
 export function generateStaticParams() {
   return locales.map((lang) => ({ lang }));
 }
@@ -43,7 +43,7 @@ export default async function GalleryPage({
 
   return (
     <main className="px-4 md:px-8">
-      <HomeReveal>
+      <PageReveal>
       <div className="mx-auto max-w-[1200px]">
         {/* header */}
         <section className="relative mt-6 overflow-hidden rounded-[3rem] glass-card-warm fade-up" style={{ animationDelay: '0s' }}>
@@ -93,7 +93,7 @@ export default async function GalleryPage({
           {dict.gallery.placeholder}
         </p>
       </div>
-      </HomeReveal>
+      </PageReveal>
     </main>
   );
 }

@@ -8,7 +8,7 @@ import { songs } from '@/lib/data/songs';
 import { getMediaLinks } from '@/lib/data/media-links';
 import { SparkleIcon } from '@/components/SparkleIcon';
 import { Starfield } from '@/components/Starfield';
-import { HomeReveal } from '@/components/HomeReveal';
+import { PageReveal } from '@/components/PageReveal';
 
 export function generateStaticParams() {
   return locales.map((lang) => ({ lang }));
@@ -43,7 +43,7 @@ export default async function MusicPage({
   const dict = getDictionary(locale);
 
   return (
-      <HomeReveal>
+      <PageReveal>
     <main className="px-4 md:px-8">
       <div className="mx-auto max-w-[1200px]">
         {/* Page header */}
@@ -130,6 +130,6 @@ export default async function MusicPage({
         </section>
       </div>
     </main>
-      </HomeReveal>
+      </PageReveal>
   );
 }

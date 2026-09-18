@@ -9,7 +9,7 @@ import { SparkleIcon } from '@/components/SparkleIcon';
 import { Starfield } from '@/components/Starfield';
 import { PaperPlane } from '@/components/PaperPlane';
 
-import { HomeReveal } from '@/components/HomeReveal';
+import { PageReveal } from '@/components/PageReveal';
 export function generateStaticParams() {
   return locales.map((lang) => ({ lang }));
 }
@@ -51,7 +51,7 @@ export default async function AboutPage({
 
   return (
     <main className="px-4 md:px-8">
-      <HomeReveal>
+      <PageReveal>
       <div className="mx-auto max-w-[1100px]">
         {/* Hero card */}
         <section className="relative mt-6 overflow-hidden rounded-[3rem] glass-card-warm fade-up" style={{ animationDelay: '0s' }}>
@@ -195,7 +195,7 @@ export default async function AboutPage({
           </div>
         </section>
       </div>
-      </HomeReveal>
+      </PageReveal>
     </main>
   );
 }

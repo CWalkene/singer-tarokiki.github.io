@@ -5,7 +5,7 @@ import { notFound } from 'next/navigation';
 import { SparkleIcon } from '@/components/SparkleIcon';
 import { Starfield } from '@/components/Starfield';
 
-import { HomeReveal } from '@/components/HomeReveal';
+import { PageReveal } from '@/components/PageReveal';
 export function generateStaticParams() {
   return locales.map((lang) => ({ lang }));
 }
@@ -32,7 +32,7 @@ export default async function ShowsPage({
   const dict = getDictionary(locale);
 
   return (
-      <HomeReveal>
+      <PageReveal>
     <main className="px-4 md:px-8">
       <div className="mx-auto max-w-[1200px]">
         {/* header */}
@@ -76,6 +76,6 @@ export default async function ShowsPage({
         </section>
       </div>
     </main>
-      </HomeReveal>
+      </PageReveal>
   );
 }

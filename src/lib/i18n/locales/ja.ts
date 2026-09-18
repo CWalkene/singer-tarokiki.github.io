@@ -13,6 +13,10 @@ export const ja = {
     about: 'プロフィール',
     language: '言語',
     skipToContent: '本文へ移動',
+    primaryNavigation: 'メインナビゲーション',
+    mobileNavigation: 'モバイルナビゲーション',
+    openMenu: 'メニューを開く',
+    closeMenu: 'メニューを閉じる',
   },
   home: {
     eyebrow: '· 声のひと束 ·',

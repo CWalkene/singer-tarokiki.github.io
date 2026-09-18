@@ -13,6 +13,10 @@ export const en = {
     about: 'About',
     language: 'Language',
     skipToContent: 'Skip to main content',
+    primaryNavigation: 'Primary navigation',
+    mobileNavigation: 'Mobile navigation',
+    openMenu: 'Open menu',
+    closeMenu: 'Close menu',
   },
   home: {
     eyebrow: '· a bundle of voice ·',

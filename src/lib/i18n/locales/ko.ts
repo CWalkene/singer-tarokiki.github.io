@@ -13,6 +13,10 @@ export const ko = {
     about: '프로필',
     language: '언어',
     skipToContent: '본문으로 이동',
+    primaryNavigation: '주 탐색',
+    mobileNavigation: '모바일 탐색',
+    openMenu: '메뉴 열기',
+    closeMenu: '메뉴 닫기',
   },
   home: {
     eyebrow: '· 한 다발의 목소리 ·',

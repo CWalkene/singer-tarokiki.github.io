@@ -13,6 +13,10 @@ export const zh = {
     about: '关于',
     language: '语言',
     skipToContent: '跳转到主要内容',
+    primaryNavigation: '主导航',
+    mobileNavigation: '移动端导航',
+    openMenu: '打开菜单',
+    closeMenu: '关闭菜单',
   },
   home: {
     eyebrow: '· 一束声音 ·',

@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import { SparkleIcon } from '@/components/SparkleIcon';
-import { HOME_REVEAL_EVENT } from '@/components/HomeReveal';
+import { PAGE_REVEAL_EVENT } from '@/components/PageReveal';
 import type { Locale } from '@/lib/i18n/config';
 import type { Dictionary } from '@/lib/i18n/dictionaries';
 
@@ -37,7 +37,7 @@ export function Header({ locale, dict }: Props) {
     setOpenPath(null);
     // 切页由新页面自然播放；只有重复点击当前页才主动重播。
     if (normalizedPath === href) {
-      window.dispatchEvent(new Event(HOME_REVEAL_EVENT));
+      window.dispatchEvent(new Event(PAGE_REVEAL_EVENT));
     }
   };
 
@@ -70,7 +70,7 @@ export function Header({ locale, dict }: Props) {
             </span>
           </Link>
 
-          <nav className="hidden items-center gap-5 md:flex" aria-label="Primary navigation">
+          <nav className="hidden items-center gap-5 md:flex" aria-label={dict.nav.primaryNavigation}>
             {items.map((it) => {
               const isActive = normalizedPath === it.href ||
                 (it.href !== `/${locale}` && normalizedPath.startsWith(`${it.href}/`));
@@ -104,7 +104,7 @@ export function Header({ locale, dict }: Props) {
               type="button"
               onClick={toggleMenu}
               className="rounded-full bg-white/60 p-2 text-[var(--color-ink-soft)] transition-colors hover:bg-white hover:text-[var(--color-ink)]"
-              aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+              aria-label={isMenuOpen ? dict.nav.closeMenu : dict.nav.openMenu}
               aria-expanded={isMenuOpen}
               aria-controls="mobile-navigation"
               suppressHydrationWarning
@@ -122,7 +122,7 @@ export function Header({ locale, dict }: Props) {
           inert={!isMenuOpen}
         >
           <div className="mobile-navigation__clip">
-          <nav id="mobile-navigation" className="glass-card mt-2 rounded-3xl p-3" aria-label="Mobile navigation">
+          <nav id="mobile-navigation" className="glass-card mt-2 rounded-3xl p-3" aria-label={dict.nav.mobileNavigation}>
             <div className="flex flex-col gap-1">
               {items.map((it) => {
                 const isActive = normalizedPath === it.href ||

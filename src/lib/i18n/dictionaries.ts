@@ -14,6 +14,10 @@ export interface Dictionary {
     about: string;
     language: string;
     skipToContent: string;
+    primaryNavigation: string;
+    mobileNavigation: string;
+    openMenu: string;
+    closeMenu: string;
   };
   home: {
     eyebrow: string;
